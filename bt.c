@@ -138,3 +138,8 @@ void findRoot(Tree *t){
         printf("(%d)\n", t->value);
     }
 }
+int findsize(Tree *t){
+    if(t == NULL)
+        return 0;
+    return (findsize(t->left)+findsize(t->right)+1);    
+}

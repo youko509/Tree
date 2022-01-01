@@ -17,4 +17,5 @@ void listleafs(Tree *tr);
 Tree *insertOnLeafs(Tree *t, int v1, int v2);
 Tree *listNodes(Tree *t);
 void findRoot(Tree *t);
+int findsize(Tree *t);
 #endif 
