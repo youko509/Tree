@@ -15,7 +15,6 @@ Tree *newTree(int x){
     tr->right=NULL;
     tr->parent=NULL;
 
-    printf("Cretation de %d \n",tr->value);
     return tr;
 }
 void clean(Tree *t){
@@ -132,4 +131,10 @@ Tree *listNodes(Tree *t){
         printf("(%d) -> (%d)\n",t->parent->value,t->value);
     }
     return t;
+}
+
+void findRoot(Tree *t){
+    if(t->parent ==NULL){
+        printf("(%d)\n", t->value);
+    }
 }
