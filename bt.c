@@ -63,10 +63,10 @@ void displayPostfixe(Tree * t){
     }
 
     if(t->right !=NULL)
-        displayPrefixe(t->right); 
+        displayPostfixe(t->right); 
 
     if(t->left !=NULL)
-        displayPrefixe(t->left);  
+        displayPostfixe(t->left);  
          
 }
 void listleafs(Tree *t){
@@ -142,4 +142,23 @@ int findsize(Tree *t){
     if(t == NULL)
         return 0;
     return (findsize(t->left)+findsize(t->right)+1);    
+}
+
+void displayInfixe(Tree * t){
+    if(t==NULL)
+        return;
+
+        
+    if(t->parent !=NULL){
+        printf("(%d) -> (%d)\n",t->parent->value,t->value);
+    }else{
+        printf("(%d)\n", t->value);
+    }
+
+    if(t->right !=NULL)
+        displayPrefixe(t->right); 
+
+    if(t->left !=NULL)
+        displayPrefixe(t->left);  
+         
 }
