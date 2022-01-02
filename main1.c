@@ -8,7 +8,7 @@ int main(int argc, char *argv[]){
     // findRoot(T);
     Tree * tree =createTree(createTree(createTree(NULL,createTree(newTree(5),newTree(23),3),13),NULL,41),createTree(newTree(7),createTree(newTree(19),NULL,11),2),37);
     
-    displayPrefixe(tree);
+    displayInfixe(tree);
     
     clean(tree);
     

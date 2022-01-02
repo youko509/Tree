@@ -100,7 +100,7 @@ Tree *insertOnLeafs(Tree *t,int v1,int v2){
     return t;
 }
 
-Tree *findleafs(Tree *t){
+Tree *findInnerleafs(Tree *t){
     if(t == NULL)
         return 0;
     if(t->left !=NULL){ 
@@ -147,16 +147,14 @@ int findsize(Tree *t){
 void displayInfixe(Tree * t){
     if(t==NULL)
         return;
-
+    if(t->right !=NULL)
+        displayPrefixe(t->right); 
         
     if(t->parent !=NULL){
         printf("(%d) -> (%d)\n",t->parent->value,t->value);
     }else{
         printf("(%d)\n", t->value);
     }
-
-    if(t->right !=NULL)
-        displayPrefixe(t->right); 
 
     if(t->left !=NULL)
         displayPrefixe(t->left);  
