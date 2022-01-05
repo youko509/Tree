@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+ 
+#include <stdbool.h>
 Tree *newTree(int x){
     Tree *tr = malloc(sizeof(*tr));
 
@@ -18,8 +19,11 @@ Tree *newTree(int x){
     return tr;
 }
 void clean(Tree *t){
-    if (t==NULL)
-        return;
+    
+    if(t == NULL){
+       
+        return ;
+    }
     clean(t->left);
     clean(t->right);
     free(t);    
@@ -36,10 +40,12 @@ Tree *createTree(Tree *left, Tree *right, int node){
     return t;       
 }
 void displayPrefixe(Tree * t){
-    if(t==NULL)
-        return;
 
-     
+    if(t == NULL){
+        
+        return ;
+    }
+
     if(t->parent !=NULL){
         printf("(%d) -> (%d)\n",t->parent->value,t->value);
     }else{
@@ -52,10 +58,12 @@ void displayPrefixe(Tree * t){
         displayPrefixe(t->right);      
 }
 void displayPostfixe(Tree * t){
-    if(t==NULL)
-        return;
 
+    if(t == NULL){
         
+        return ;
+    }
+
     if(t->parent !=NULL){
         printf("(%d) -> (%d)\n",t->parent->value,t->value);
     }else{
@@ -70,22 +78,12 @@ void displayPostfixe(Tree * t){
          
 }
 void listleafs(Tree *t){
-    if(t == NULL)
-        return;
-    if(t->left !=NULL){ 
-        listleafs(t->left);    
-    }
-    if(t->right !=NULL){
-        listleafs(t->right);    
-    }
-     if(t->right ==NULL & t->left == NULL  ){
-            printf("(%d) -> (%d)\n",t->parent->value,t->value);
-     }
-}
 
-Tree *insertOnLeafs(Tree *t,int v1,int v2){
-    if(t == NULL)
-        return 0;
+   if(t == NULL){
+        printf("L'arbre est vide");
+        return ;
+    }
+
     if(t->left !=NULL){ 
         listleafs(t->left);    
     }
@@ -93,70 +91,124 @@ Tree *insertOnLeafs(Tree *t,int v1,int v2){
         listleafs(t->right);    
     }
     if(t->right ==NULL & t->left == NULL  ){
-       createTree(newTree(v1),newTree(v2),t->value);     
-    }else{
-        printf("it's not a leafs");
+        printf("(%d) -> (%d)\n",t->parent->value,t->value);
+    }
+}
+
+Tree *insertOnLeafs(Tree *t){
+    int choice;
+    
+    if(t == NULL){
+        printf("L'arbre est vide");
+        return 0;
+    }
+
+    if(t->right ==NULL && t->left == NULL  ){
+        int v1,v2;
+        printf("voulez-vous inserer un noeud a la feuille %d ?\n tapez 1 pour confirmer",t->value);
+        scanf("%d",&choice);
+
+        if(choice==1){
+            printf("enter la valeur 1\n");
+            scanf("%d",&v1);
+
+            printf("enter la valeur 2\n");
+            scanf("%d",&v2);
+            
+            Tree *tr1=newTree(v1);
+            Tree *tr2=newTree(v2);
+            t->left=tr1;
+            t->right=tr2;
+
+            if(tr1!=NULL)
+                tr1->parent=t;
+            if(tr2 !=NULL)
+                tr2->parent=t;
+
+            printf("value : %d\n",t->right->value);
+            printf("parent : %d\n",t->parent->value);
+
+        }
+           
+    } 
+    
+    if(t->left !=NULL){ 
+        insertOnLeafs(t->left);
+    }
+    if(t->right !=NULL){
+        insertOnLeafs(t->right);    
     }
     return t;
 }
 
-Tree *findInnerleafs(Tree *t){
-    if(t == NULL)
-        return 0;
-    if(t->left !=NULL){ 
-        listleafs(t->left);    
-    }
-    if(t->right !=NULL){
-        listleafs(t->right);    
-    }
-     if(t->right ==NULL & t->left == NULL  ){
-            printf("(%d) -> (%d)\n",t->parent->value,t->value);
-    }
-    return t;
-    
-}
 
 Tree *listNodes(Tree *t){
     
-    if(t == NULL)
+    if(t == NULL){
+        printf("L'arbre est vide");
         return 0;
-    if(t->left !=NULL){ 
+    }
+    if(t->left != NULL){ 
         listNodes(t->left);    
     }
-    if(t->right !=NULL){
+    if(t->right != NULL){
         listNodes(t->right);    
     }
-    
-    if(t->right !=NULL || t->left != NULL  ){
-        printf("(%d) -> (%d)\n",t->parent->value,t->value);
+    if(t->right != NULL || t->left != NULL  ){
+        printf("(%d)",t->value);
     }
+    printf("\n");
     return t;
 }
 
 void findRoot(Tree *t){
-    if(t->parent ==NULL){
+    if(t == NULL){
+        printf("L'arbre est vide");
+        return ;
+    }
+    if(t->parent == NULL){
         printf("(%d)\n", t->value);
     }
+
 }
 int findsize(Tree *t){
-    if(t == NULL)
+    if(t == NULL){
+        printf("L'arbre est vide");
         return 0;
-    return (findsize(t->left)+findsize(t->right)+1);    
+    }
+    return (findsize(t->left)+findsize(t->right)+1);
+
 }
 
 void displayInfixe(Tree * t){
-    if(t==NULL)
-        return;
-    if(t->right !=NULL)
-        displayPrefixe(t->right); 
+
+    if(t == NULL){
         
-    if(t->parent !=NULL){
-        printf("(%d) -> (%d)\n",t->parent->value,t->value);
+        return ;
+    }
+    
+    if(t->left !=NULL)
+        displayInfixe(t->left);
+    printf("(%d)\n", t->value);      
+    if(t->right !=NULL)
+        displayInfixe(t->right); 
+
+   
+    
+}
+int findHeight(Tree *t){
+
+    int leftHeight, rightHeight;
+    if(t == NULL){
+        return 0;
     }else{
-        printf("(%d)\n", t->value);
+        leftHeight= findHeight(t->left);
+        rightHeight = findHeight(t->right);
+        if(leftHeight>rightHeight){
+            return (leftHeight+1);
+        }else{
+            return (rightHeight+1);
+        }
     }
 
-    if(t->left !=NULL)
-        displayPrefixe(t->left);  
-         
 }
