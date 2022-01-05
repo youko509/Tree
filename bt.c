@@ -28,6 +28,45 @@ void clean(Tree *t){
     clean(t->right);
     free(t);    
 }
+void cleanNode(Tree *t){
+    int choice;
+    if(t == NULL){
+       
+        return ;
+    }
+     if(t->parent !=NULL || t->parent == NULL ){
+        int v1,v2;
+        if(t == NULL || t->value==0){
+                printf("bad\n");
+                
+            return ;
+            }
+        printf("voulez-vous supprimer ce noeud %d ?\n tapez 1 pour confirmer\n",t->value);
+        scanf("%d",&choice);
+
+        if(choice==1){
+            if(t->left !=NULL){
+                t->parent =NULL;  
+                clean(t->left);
+            }
+            if(t->right !=NULL){
+                t->parent =NULL;
+                clean(t->right);
+            }
+            free(t);
+            return ;
+        }
+           
+    } 
+    
+    if(t->left !=NULL){ 
+        cleanNode(t->left);
+    }
+    if(t->right !=NULL){
+        cleanNode(t->right);    
+    }
+        
+}
 Tree *createTree(Tree *left, Tree *right, int node){
 
     Tree *t =newTree(node);
@@ -47,14 +86,14 @@ void displayPrefixe(Tree * t){
     }
 
     if(t->parent !=NULL){
-        printf("(%d) -> (%d)\n",t->parent->value,t->value);
+        printf(" (%d) ->(%d)\n",t->parent->value,t->value);
     }else{
         printf("(%d)\n", t->value);
     }
 
-    if(t->left !=NULL)
+    if(t->left !=NULL && t->left->value>0)
         displayPrefixe(t->left);  
-    if(t->right !=NULL)
+    if(t->right !=NULL && t->right->value>0)
         displayPrefixe(t->right);      
 }
 void displayPostfixe(Tree * t){

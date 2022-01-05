@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     printf("2  - Determiner la hauteur de l'arbre\n");
     printf("3  - Determiner la taille de l'arbre\n");
     printf("4  - Determiner la liste des feuilles de l'arbre\n");
-    printf("5  - D'inserer un noeud dans l'arbre\n");
+    printf("5  - Inserer un noeud dans l'arbre\n");
     printf("6  - Determiner la liste des feuilles interne de l'arbre\n");
     printf("7  - De supprimer un noeud de l'arbre\n");
     printf("8  - D'afficher l'arbre en ordre infixe\n");
@@ -42,8 +42,8 @@ int main(int argc, char *argv[]){
             listNodes(tree);
             break;
         case 7:
-            printf("Entrer le noeud à supprimé");
-            clean(tree);
+            cleanNode(tree);
+            displayPrefixe(tree);
             break;
         case 8:
             displayInfixe(tree);
@@ -55,6 +55,6 @@ int main(int argc, char *argv[]){
             displayPostfixe(tree);
             break;
     }
-    clean(tree);
+   
     return 0;
 }

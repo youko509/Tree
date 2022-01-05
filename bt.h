@@ -11,6 +11,7 @@ typedef struct Tree
 
 Tree *newTree(int x);
 void clean(Tree *t);
+void cleanNode(Tree *t);
 Tree *createTree(Tree *left, Tree *right, int node);
 void displayPostfixe(Tree * t);
 void displayPrefixe(Tree * t);
