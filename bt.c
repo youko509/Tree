@@ -34,9 +34,9 @@ void cleanNode(Tree *t){
        
         return ;
     }
-     if(t->parent !=NULL || t->parent == NULL ){
-        int v1,v2;
-        if(t == NULL || t->value==0){
+     if(t->parent !=NULL  ){
+        
+        if(t == NULL){
                 printf("bad\n");
                 
             return ;
@@ -45,12 +45,13 @@ void cleanNode(Tree *t){
         scanf("%d",&choice);
 
         if(choice==1){
+            t->parent =NULL; 
             if(t->left !=NULL){
-                t->parent =NULL;  
+                 
                 clean(t->left);
             }
             if(t->right !=NULL){
-                t->parent =NULL;
+                
                 clean(t->right);
             }
             free(t);
