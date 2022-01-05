@@ -36,15 +36,11 @@ void cleanNode(Tree *t){
     }
      if(t->parent !=NULL  ){
         
-        if(t == NULL){
-                printf("bad\n");
-                
-            return ;
-            }
         printf("voulez-vous supprimer ce noeud %d ?\n tapez 1 pour confirmer\n",t->value);
         scanf("%d",&choice);
 
         if(choice==1){
+           
             t->parent =NULL; 
             if(t->left !=NULL){
                  
@@ -194,10 +190,13 @@ Tree *listNodes(Tree *t){
     if(t->right != NULL){
         listNodes(t->right);    
     }
-    if(t->right != NULL || t->left != NULL  ){
-        printf("(%d)",t->value);
+    if( t->parent !=NULL ){
+        if(t->right != NULL || t->left != NULL ){
+            printf("(%d)\n",t->value);
+        }
+       
     }
-    printf("\n");
+    
     return t;
 }
 

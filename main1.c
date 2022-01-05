@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
     printf("3  - Determiner la taille de l'arbre\n");
     printf("4  - Determiner la liste des feuilles de l'arbre\n");
     printf("5  - Inserer un noeud dans l'arbre\n");
-    printf("6  - Determiner la liste des feuilles interne de l'arbre\n");
+    printf("6  - Determiner la liste des noeuds interne de l'arbre\n");
     printf("7  - De supprimer un noeud de l'arbre\n");
     printf("8  - D'afficher l'arbre en ordre infixe\n");
     printf("9  - D'afficher l'arbre en ordre prefixe\n");
